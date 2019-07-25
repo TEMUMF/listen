@@ -1,0 +1,9 @@
+<!--pages/index/index.wxml-->
+<van-search shape="round" placeholder="搜索你想听的节目" bind:focus="toSearch"/>
+<view>
+  <swiper indicator-dots="true" indicator-color="" indicator-active-color="#fff" autoplay="true">
+    <swiper-item>
+      <image src=""></image>
+    </swiper-item>
+  </swiper>
+</view>
