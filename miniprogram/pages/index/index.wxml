@@ -1,9 +1,51 @@
 <!--pages/index/index.wxml-->
-<van-search shape="round" placeholder="搜索你想听的节目" bind:focus="toSearch"/>
-<view>
-  <swiper indicator-dots="true" indicator-color="" indicator-active-color="#fff" autoplay="true">
-    <swiper-item>
-      <image src=""></image>
-    </swiper-item>
-  </swiper>
+<view class="shouye">
+  <van-search shape="round" placeholder="搜索你想听的节目" bind:focus="toSearch"/>
+  <view>
+    <swiper indicator-dots="true" indicator-color="" indicator-active-color="#fff" autoplay="true">
+      <swiper-item wx:for="{{carousel}}" wx:key="index" class="carousel-item">
+        <image src="{{carouselUrl}}{{item.coverPath}}" class="slide-image"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="details-nav">
+    <view wx:for="{{details.tomatoes}}" wx:key="index">
+      <image src="{{item.img}}"></image>
+      <view>{{item.name}}</view>
+    </view>
+  </view>
+  <view>
+    <view class="detail-title">
+      <view>猜你喜欢</view>
+      <view class="getMore">查看全部 <van-icon name="arrow" size="1em" /></view>
+    </view>
+    <view class="detail-guess">
+      <view wx:for="{{indexGuess}}" wx:key="index">
+        <image src="{{item.albumCoverPath}}" ></image>
+        <van-tag plain><van-icon name="audio" size="1.5em"/>{{item.albumPlayCount}}</van-tag>
+        <view class="album-title">{{item.albumTitle}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="" wx:for="{{details.moduleRankDatas}}" wx:key="index">
+    <view class="detail-title">
+      <view>{{item.title}}</view>
+      <view class="getMore">查看全部 <van-icon name="arrow" size="1em" /></view>
+    </view>
+    <view class="detail-content" wx:for="{{item.rankingContentInfoList.rankModuleInfoList}}" wx:key="index">
+      <view class="detail-cover">
+        <image src="{{carouselUrl}}{{item.albumInfo.cover}}"></image>
+      </view>
+      <view class="detail-context">
+        <view class="album-title">{{item.albumInfo.title}}</view>
+        <view class="album-text">{{item.albumInfo.shortIntro}}</view>
+        <view class="album-count">
+          <van-icon name="audio" />
+          <text>{{item.statCountInfo.playCount}}</text>
+          <van-icon name="bar-chart-o" />
+          <text>{{item.statCountInfo.trackCount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

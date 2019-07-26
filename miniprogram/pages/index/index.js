@@ -6,16 +6,56 @@ Page({
    * 页面的初始数据
    */
   data: {
-    carousel:[]
+    carousel:[],
+    carouselUrl:'//imagev2.xmcdn.com/',
+    details:[],
+    guess:[],
+    indexGuess:[],
   },
   getCarousel:function(){
-    // ldb.collection("")
+    wx.cloud.callFunction({
+      name:"getCarousel",
+      data:{},
+      success:res=>{
+        var result=JSON.parse(res.result);
+        this.setData({
+          carousel:result.data.slideshow
+        });
+      }
+    })
   },
+  getDetails:function(){
+    wx.cloud.callFunction({
+      name:"getIndexDetail",
+      data:{},
+      success:res=>{
+        var result=JSON.parse(res.result);
+        console.log(result);
+        this.setData({
+          details: result.data.moduleContent
+        })
+      }
+    });
+    wx.cloud.callFunction({
+      name:"guess",
+      data:{},
+      success:res=>{
+        var result=JSON.parse(res.result);
+        console.log(result)
+        this.setData({
+          guess: result.data.recommendInfoList,
+          indexGuess:result.data.recommendInfoList.slice(0,3)
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getCarousel();
+    this.getDetails();
   },
 
   /**

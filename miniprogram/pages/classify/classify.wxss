@@ -1,1 +1,31 @@
 /* pages/classify/classify.wxss */
+.l-title{
+  font-size:43rpx;
+  font-weight:800;
+}
+.content{
+  background-color:#f9f9fb;
+  margin:10rpx 0;
+  display:flex;
+  align-items: center;
+}
+.m-title{
+  width:20%;
+  font-size:35rpx;
+  font-weight:700;
+  text-align:center;
+}
+.m-title image{
+  width:80rpx;
+  height:80rpx;
+}
+.text-hover.active{
+  color:#e94921;
+}
+.s-title{
+  font-size:0.8em;
+  margin:5rpx 10rpx;
+}
+.s-content{
+  width:80%;
+}

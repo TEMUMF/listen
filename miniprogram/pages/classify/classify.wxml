@@ -3,14 +3,15 @@
 <view wx:for="{{list.data}}" wx:key="index">
   <text class="l-title">{{item.name}}</text>
   <view wx:for="{{item.categories}}" wx:key="index" class="content">
-    <view class="m-title">
-      <text>{{item.displayName}}</text>
+    <view class="m-title text-hover">
+      <image src="{{item.picPath}}"></image>
+      <view>{{item.displayName}}</view>
     </view>
-    <view>
-      <view>推荐</view>
-      <text class="s-title" wx:for="{{item.subcategories}}" wx:key="index" wx:if="{{item.metadataId==6666666}}">{{item.displayValue}}</text>
-      <view>分类</view>
-      <text class="s-title" wx:for="{{item.subcategories}}" wx:key="index" wx:if="{{item.metadataId!==6666666}}">{{item.displayValue}}</text>
+    <view class="s-content">
+      <view class="m-title">推荐</view>
+      <text class="s-title text-hover" wx:for="{{item.subcategories}}" wx:key="index" wx:if="{{item.metadataId==6666666}}">{{item.displayValue}}</text>
+      <view class="m-title">分类</view>
+      <text class="s-title text-hover" wx:for="{{item.subcategories}}" wx:key="index" wx:if="{{item.metadataId!==6666666}}">{{item.displayValue}}</text>
     </view>
   </view>
 </view>
