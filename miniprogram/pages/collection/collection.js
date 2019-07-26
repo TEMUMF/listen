@@ -1,35 +1,18 @@
-// pages/classify/classify.js
+// pages/collection/collection.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[]
+    active:0
   },
-  getClassify:function(){
-    wx.cloud.callFunction({
-      name: "getListenClassify",
-      data: {},
-      success: res => {
-        var result=JSON.parse(res.result);
-        console.log(result);
-        this.setData({
-          list:result
-        });
-        wx.hideLoading();
-      },
-      fail: err => {
-        console.log(err);
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading();
-    this.getClassify();
+
   },
 
   /**

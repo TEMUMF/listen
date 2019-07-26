@@ -2,6 +2,8 @@
   "pages": [
    "pages/index/index",
    "pages/classify/classify",
+   "pages/collection/collection",
+   "pages/mine/mine",
     "pages/details/details"
   ],
   "window": {
@@ -25,12 +27,12 @@
       "iconPath": "images/kind.png",
       "selectedIconPath": "images/kindS.png"
     },{
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/collection/collection",
       "text": "收藏",
       "iconPath": "images/collection.png",
       "selectedIconPath": "images/collectionS.png"
     },{
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/mine/mine",
       "text": "我的",
       "iconPath": "images/mine.png",
       "selectedIconPath": "images/mineS.png"

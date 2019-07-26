@@ -1,0 +1,21 @@
+<view wx:if="{{hasLogin}}">
+  <view>
+    <image></image>
+    <text></text>
+    <van-button>客服服务</van-button>
+    <van-cell title="签到" is-link></van-cell>
+  </view>
+  <van-cell-group>
+    <van-cell title="定时关闭" is-link></van-cell>
+    <van-switch-cell title="夜间模式" size="large"></van-switch-cell>
+    <van-cell title="意见反馈" is-link></van-cell>
+    <van-cell title="切换帐号" is-link></van-cell>
+  </van-cell-group>
+</view>
+<view wx:if="{{!hasLogin}}" class="to-login">
+  <view>
+    <image src="../../images/mine.png"></image>
+  </view>
+  <van-button round size="large" type="primary">微信登录</van-button>
+  <van-button round size="large" type="primary" plain>手机号登录</van-button>
+</view>

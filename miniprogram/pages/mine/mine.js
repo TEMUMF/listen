@@ -1,54 +1,31 @@
-// pages/index/index.js
-const ldb=wx.cloud.database();
+// pages/mine/mine.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    carousel:[],
-    carouselUrl:'//imagev2.xmcdn.com/',
-    details:[],
-    guess:[],
-    indexGuess:[],
+    userList:[],
+    hasLogin:false
   },
-  getCarousel:function(){
+  getCurrent:function(){
     wx.cloud.callFunction({
-      name:"getCarousel",
+      name:"getCurrentUser",
       data:{},
       success:res=>{
         var result=JSON.parse(res.result);
-        this.setData({
-          carousel:result.data.slideshow
-        });
-      }
-    })
-  },
-  getDetails:function(){
-    wx.cloud.callFunction({
-      name:"getIndexDetail",
-      data:{},
-      success:res=>{
-        var result=JSON.parse(res.result);
+        var hadLogin=!result.isNeedLogin;
         console.log(result);
         this.setData({
-          details: result.data.moduleContent
-        });
-        wx.hideLoading();
-      }
-    });
-    wx.cloud.callFunction({
-      name:"guess",
-      data:{},
-      success:res=>{
-        var result=JSON.parse(res.result);
-        console.log(result)
-        this.setData({
-          guess: result.data.recommendInfoList,
-          indexGuess:result.data.recommendInfoList.slice(0,3)
+          userList:result,
+          hasLogin:hadLogin
         })
+        wx.hideLoading();
+      },
+      fail:err=>{
+        console.log(err);
       }
-    });
+    })
   },
 
   /**
@@ -56,8 +33,7 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading();
-    this.getCarousel();
-    this.getDetails();
+    this.getCurrent();
   },
 
   /**

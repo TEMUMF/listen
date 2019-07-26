@@ -2,7 +2,7 @@
 <view class="shouye">
   <van-search shape="round" placeholder="搜索你想听的节目" bind:focus="toSearch"/>
   <view>
-    <swiper indicator-dots="true" indicator-color="" indicator-active-color="#fff" autoplay="true">
+    <swiper loop="true" indicator-dots="true" indicator-active-color="#fff" autoplay="true">
       <swiper-item wx:for="{{carousel}}" wx:key="index" class="carousel-item">
         <image src="{{carouselUrl}}{{item.coverPath}}" class="slide-image"></image>
       </swiper-item>
@@ -21,8 +21,13 @@
     </view>
     <view class="detail-guess">
       <view wx:for="{{indexGuess}}" wx:key="index">
-        <image src="{{item.albumCoverPath}}" ></image>
-        <van-tag plain><van-icon name="audio" size="1.5em"/>{{item.albumPlayCount}}</van-tag>
+        <view class="detail-guess-img">
+          <image src="{{item.albumCoverPath}}" ></image>
+          <view class="album-count">
+            <van-icon name="audio" size="1em"/>
+            <text>{{item.albumPlayCount}}</text>
+          </view>
+        </view>
         <view class="album-title">{{item.albumTitle}}</view>
       </view>
     </view>

@@ -40,6 +40,9 @@
 .detail-guess>view{
   width:30%;
 }
+.detail-guess .detail-guess-img{
+  position:relative;
+}
 .detail-guess view image,.detail-content view image{
   width:100%;
   height:200rpx;
@@ -77,11 +80,17 @@
   overflow:hidden;
   text-overflow:ellipsis;
 }
-.detail-content .detail-context .album-count{
+.album-count{
   font-size:.6em;
   position:absolute;
   bottom:0;
 }
-.detail-content .detail-context .album-count text{
+.album-count text{
   margin:0 5rpx; 
+}
+.detail-guess-img .album-count{
+  width:100%;
+  background-image:linear-gradient(to bottom,rgba(126, 119, 119,0.5),rgba(66, 60, 60,0.5));
+  bottom:10rpx;
+  padding:5rpx -10rpx 5rpx 10rpx;
 }

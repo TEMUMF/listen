@@ -1,0 +1,13 @@
+<view>
+  <van-tabs active="{{active}}" bind:change="onChange" swipeable>
+    <van-tab title="我的收藏">
+      neirong
+    </van-tab>
+    <van-tab title="我的已购">
+      neirong2
+    </van-tab>
+    <van-tab title="收听历史">
+      neirong3
+    </van-tab>
+  </van-tabs>
+</view>
