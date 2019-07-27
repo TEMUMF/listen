@@ -6,7 +6,29 @@ Page({
    */
   data: {
     userList:[],
-    hasLogin:false
+    chooseLogin:"微信登录",
+    hasLogin:false,
+    userInfo:{
+      cover:"../../images/homeS.png",
+      userName:"保温杯里泡枸杞",
+      isVip:false
+    },
+    checked:false,
+    actions:[{
+      name:"不开启"
+    },{
+      name:"播完当前声音关闭"
+    },{
+      name:"播完2首声音关闭"
+    },{
+      name:"10分钟后"
+    },{
+      name: "20分钟后"
+    },{
+      name: "30分钟后"
+    }],
+    timeOutClose:false,
+    popup:false
   },
   getCurrent:function(){
     wx.cloud.callFunction({
@@ -25,6 +47,60 @@ Page({
       fail:err=>{
         console.log(err);
       }
+    })
+  },
+  toWechatLogin:function(){
+    this.setData({
+      chooseLogin:"登录中..."
+    });
+    wx.login({
+      timeout:120000,
+      success:res=>{
+        var userCode=res.code;
+        console.log(userCode);
+        wx.request({
+          url: '',
+          data:{
+            code:userCode
+          },
+          success:res=>{
+            console.log(res)
+          }
+        })
+      },
+      fail:err=>{
+        wx.showToast({
+          title: '登录失败',
+        })
+      }
+    })
+  },
+  onChange:function(e){
+    this.setData({
+      checked:e.detail
+    })
+  },
+  getUserPhone:function(e){
+    console.log(e);
+    wx.bindgetphonenumber()
+    .then(res=>{
+      console.log(res)
+    })
+  },
+  setTimeClose:function(){
+    this.setData({
+      timeOutClose:true
+    })
+  },
+  toClose:function(){
+    this.setData({
+      timeOutClose:false,
+      popup:false
+    })
+  },
+  signIn:function(){
+    this.setData({
+      popup:true
     })
   },
 

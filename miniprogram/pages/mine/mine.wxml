@@ -1,21 +1,31 @@
-<view wx:if="{{hasLogin}}">
-  <view>
-    <image></image>
-    <text></text>
-    <van-button>客服服务</van-button>
-    <van-cell title="签到" is-link></van-cell>
-  </view>
+<view wx:if="!{{hasLogin}}">
+  <van-row class="user-head">
+    <van-col span="5">
+      <image src="{{userInfo.cover}}" class="avator"></image>
+    </van-col>
+    <van-col span="9">
+      <text>{{userInfo.userName}}</text>
+      <image src="{{userInfo.isVip?'../../images/VIP.png':'../../images/N-VIP.png'}}" class="show-vip"></image>
+    </van-col>
+    <van-col offset="4" span="6">
+      <van-button size="small" round open-type="contact"><van-icon name="service-o" size="1em"/>客服服务</van-button>
+    </van-col>
+  </van-row>
+  <van-cell icon="calender-o" title="签到" is-link bind:click="signIn"></van-cell>
   <van-cell-group>
-    <van-cell title="定时关闭" is-link></van-cell>
-    <van-switch-cell title="夜间模式" size="large"></van-switch-cell>
-    <van-cell title="意见反馈" is-link></van-cell>
-    <van-cell title="切换帐号" is-link></van-cell>
+    <van-cell icon="underway-o" title="定时关闭" is-link bind:click="setTimeClose"></van-cell>
+    <van-switch-cell icon="eye-o" title="夜间模式" size="large" checked="{{checked}}" bind:change="onChange"></van-switch-cell>
+    <van-cell icon="notes-o" title="意见反馈" is-link></van-cell>
+    <van-cell icon="exchange" title="切换帐号" is-link></van-cell>
   </van-cell-group>
 </view>
-<view wx:if="{{!hasLogin}}" class="to-login">
+<view wx:if="{{hasLogin}}" class="to-login">
   <view>
     <image src="../../images/mine.png"></image>
   </view>
-  <van-button round size="large" type="primary">微信登录</van-button>
-  <van-button round size="large" type="primary" plain>手机号登录</van-button>
+  <van-button round size="large" type="primary" bind:click="toWechatLogin">{{chooseLogin}}</van-button>
+  <van-button round size="large" type="primary" plain open-type="getPhoneNumber" bindgetphonenumber="getUserPhone" >手机号登录</van-button>
 </view>
+
+<van-action-sheet show="{{timeOutClose}}" actions="{{actions}}" bind:close="toClose" bind:select="onSelect" cancel-text="取消" close-on-click-overly="true" bind:cancel="toClose"/>
+<van-popup show="{{popup}}" duration="1s" bind:close="toClose" close-on-click-overly="true">你今天的签到已经成功了!!!</van-popup>

@@ -4,6 +4,11 @@
     "van-cell":"vant-weapp/cell/index",
     "van-cell-group":"vant-weapp/cell-group/index",
     "van-switch":"vant-weapp/switch/index",
-    "van-switch-cell":"vant-weapp/switch-cell/index"
+    "van-switch-cell":"vant-weapp/switch-cell/index",
+    "van-row":"vant-weapp/row/index",
+    "van-col":"vant-weapp/col/index",
+    "van-icon":"vant-weapp/icon/index",
+    "van-action-sheet":"vant-weapp/action-sheet/index",
+    "van-popup":"vant-weapp/popup/index"
   }
 }
