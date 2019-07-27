@@ -1,4 +1,4 @@
-<view wx:if="!{{hasLogin}}">
+<view wx:if="{{hasLogin}}">
   <van-row class="user-head">
     <van-col span="5">
       <image src="{{userInfo.cover}}" class="avator"></image>
@@ -16,16 +16,16 @@
     <van-cell icon="underway-o" title="定时关闭" is-link bind:click="setTimeClose"></van-cell>
     <van-switch-cell icon="eye-o" title="夜间模式" size="large" checked="{{checked}}" bind:change="onChange"></van-switch-cell>
     <van-cell icon="notes-o" title="意见反馈" is-link></van-cell>
-    <van-cell icon="exchange" title="切换帐号" is-link></van-cell>
+    <van-cell icon="exchange" title="切换帐号" is-link bind:click="changeUser"></van-cell>
   </van-cell-group>
 </view>
-<view wx:if="{{hasLogin}}" class="to-login">
+<view wx:if="{{!hasLogin}}" class="to-login">
   <view>
     <image src="../../images/mine.png"></image>
   </view>
-  <van-button round size="large" type="primary" bind:click="toWechatLogin">{{chooseLogin}}</van-button>
+  <van-button round size="large" type="primary" open-type="getUserInfo" bindgetuserinfo="toWechatLogin" >{{chooseLogin}}</van-button>
   <van-button round size="large" type="primary" plain open-type="getPhoneNumber" bindgetphonenumber="getUserPhone" >手机号登录</van-button>
 </view>
 
-<van-action-sheet show="{{timeOutClose}}" actions="{{actions}}" bind:close="toClose" bind:select="onSelect" cancel-text="取消" close-on-click-overly="true" bind:cancel="toClose"/>
-<van-popup show="{{popup}}" duration="1s" bind:close="toClose" close-on-click-overly="true">你今天的签到已经成功了!!!</van-popup>
+<van-action-sheet show="{{timeOutClose}}" actions="{{actions}}" bind:close="setTimeClose" bind:select="onSelect" cancel-text="取消" close-on-click-overly="true" bind:cancel="setTimeClose"/>
+<van-popup show="{{popup}}" duration="1s" bind:close="signIn" close-on-click-overly="true">你今天的签到已经成功了!!!</van-popup>

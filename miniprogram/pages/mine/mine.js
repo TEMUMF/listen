@@ -51,24 +51,50 @@ Page({
   },
   toWechatLogin:function(){
     this.setData({
-      chooseLogin:"登录中..."
+      chooseLogin:"登录中...",
+      hasLogin:true
     });
-    wx.login({
-      timeout:120000,
+    wx.getSetting({
       success:res=>{
-        var userCode=res.code;
-        console.log(userCode);
-        wx.request({
-          url: '',
-          data:{
-            code:userCode
-          },
+      if(res.authSetting['scope.userInfo']){
+        wx.getUserInfo({
           success:res=>{
+            console.log(res);
+            // this.queryUserInfo();
+            var mine=res.userInfo;
+            this.setData({
+              userInfo: {
+                cover: mine.avatarUrl,
+                userName: mine.nickName,
+                isVip: false
+              },
+            })
+          }
+        })
+      }
+      }
+    })
+  },
+  /* 获取用户信息接口 */
+  queryUserInfo:function(){
+    wx.login({
+      success: res => {
+        var userCode = res.code;
+        wx.request({
+          url: 'https://7465-temumf-test-rwlhq-1259655188.tcb.qcloud.la',
+          data: {
+            code: userCode
+          },
+          header: { 'content-type': 'application/json' },
+          success: res => {
             console.log(res)
+            this.setData({
+              chooseLogin: "微信登录",
+            })
           }
         })
       },
-      fail:err=>{
+      fail: err => {
         wx.showToast({
           title: '登录失败',
         })
@@ -88,19 +114,20 @@ Page({
     })
   },
   setTimeClose:function(){
+    var ifClose=!this.data.timeOutClose;
     this.setData({
-      timeOutClose:true
-    })
-  },
-  toClose:function(){
-    this.setData({
-      timeOutClose:false,
-      popup:false
+      timeOutClose:ifClose
     })
   },
   signIn:function(){
+    var ifPopup=!this.data.popup;
     this.setData({
-      popup:true
+      popup:ifPopup
+    })
+  },
+  changeUser:function(){
+    this.setData({
+      // hasLogin:false
     })
   },
 
